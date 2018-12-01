@@ -7,7 +7,7 @@
   public class Solution : BaseSolution
   {
     static List<int> input;
-    public Solution() : base(1, "")
+    public Solution() : base(1, "Chronal Calibration")
     {
       input = getcurrentFreqInput();
     }
