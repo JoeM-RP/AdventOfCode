@@ -99,9 +99,7 @@
     {
       var result = new List<int>();
 
-      Console.WriteLine(Directory.GetCurrentDirectory());
-      var lines = System.IO.File.ReadAllLines("../AdventOfCode.Solutions/Day01/input.txt");
-      foreach (string line in lines)
+      foreach (string line in Input)
       {
         result.Add(int.Parse(line));
       }

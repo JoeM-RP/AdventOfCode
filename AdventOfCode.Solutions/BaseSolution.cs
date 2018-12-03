@@ -12,8 +12,10 @@ namespace AdventOfCode.Solutions
     {
       Day = day;
       Title = title;
+      Input = GetDayInput();
     }
 
+    public List<string> Input { get; }
     public int Day { get; }
     public string Title { get; }
 
@@ -32,9 +34,10 @@ namespace AdventOfCode.Solutions
 
     public abstract string GetPart2Answer();
 
-    protected List<string> getDayInput()
+    protected List<string> GetDayInput()
     {
-      Console.WriteLine(Directory.GetCurrentDirectory());
+      if (Day < 1 || Title == string.Empty) return new List<string>();
+
       var lines = System.IO.File.ReadAllLines($"../AdventOfCode.Solutions/Day{Day.ToString("D2")}/input.txt");
 
       return new List<string>(lines);

@@ -7,10 +7,8 @@
 
   public class Solution : BaseSolution
   {
-    static List<string> input;
     public Solution() : base(2, "Inventory Management System")
     {
-      input = getInput();
     }
 
     /* --- Day 2: Inventory Management System ---
@@ -42,7 +40,7 @@
       var appearsTwice = 0;
       var appearsThrice = 0;
 
-      foreach (var i in input)
+      foreach (var i in Input)
       {
         var sorted2 = i.GroupBy(x => x)
         .OrderByDescending(y => y.Count())
@@ -81,14 +79,6 @@
     public override string GetPart2Answer()
     {
       return string.Empty;
-    }
-
-    private List<string> getInput()
-    {
-      Console.WriteLine(Directory.GetCurrentDirectory());
-      var lines = System.IO.File.ReadAllLines("../AdventOfCode.Solutions/Day02/input.txt");
-
-      return new List<string>(lines);
     }
   }
 }
