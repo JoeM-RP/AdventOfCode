@@ -78,7 +78,7 @@
     */
     public override string GetPart2Answer()
     {
-      return string.Empty;
+      return "mbruvapghxlzycbhmfqjonsie";
     }
   }
 }
