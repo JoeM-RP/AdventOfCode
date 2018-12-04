@@ -87,23 +87,22 @@
      */
     public override string GetPart2Answer()
     {
-      return "ERR";
-      // This doesn't work, it seems
+      /* This needs work, it seems */
 
-      foreach (var c in claims)
-      {
-        for (var X = 0; X < maxX; X++)
-        {
-          for (var Y = 0; Y < maxY; Y++)
-          {
-            if (claimMap[X, Y] > 1)
-            {
-              continue;
-            }
-          }
-        }
-        return c.Id;
-      }
+      // foreach (var c in claims)
+      // {
+      // for (var X = 0; X < maxX; X++)
+      // {
+      //   for (var Y = 0; Y < maxY; Y++)
+      //   {
+      //     if (claimMap[X, Y] > 1)
+      //     {
+      //       continue;
+      //     }
+      //   }
+      // }
+      //   return c.Id;
+      // }
 
       return "ERR";
     }
