@@ -23,7 +23,7 @@ namespace AdventOfCode.Solutions
     {
       var sb = new StringBuilder();
 
-      //sb.AppendLine($"Day {Day} | {Title}");
+      sb.AppendLine($"Day {Day} | {Title}");
       sb.AppendLine($"Solution Part 1: {GetPart1Answer()}");
       sb.AppendLine($"Solution Part 2: {GetPart2Answer()}");
 
@@ -36,7 +36,6 @@ namespace AdventOfCode.Solutions
 
     protected List<string> GetDayInput()
     {
-      Console.WriteLine($"Day {Day} | {Title}");
       if (Day < 1 || Title == string.Empty) return new List<string>();
 
       var lines = System.IO.File.ReadAllLines($"../AdventOfCode.Solutions/Day{Day.ToString("D2")}/input.txt");

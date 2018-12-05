@@ -1,13 +1,15 @@
 ﻿namespace AdventOfCode.Solutions.Day05
 {
   using System;
+  using System.Collections.Generic;
   using System.Linq;
   using System.Text;
   using System.Text.RegularExpressions;
 
   public class Solution : BaseSolution
   {
-    public Solution() : base(6, "Alchemical Reduction")
+    private char[] alphabet = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+    public Solution() : base(5, "Alchemical Reduction")
     {
     }
     /* --- Day 5: Alchemical Reduction ---
@@ -33,25 +35,8 @@
     */
     public override string GetPart1Answer()
     {
-      return $"{11364}"; // Result of initial run - this code is terribly inefficient 
+      var remaining = GetReducedLine(Input[0]);
 
-      var patterns = new Regex(@"([a-z][A-Z])|([A-Z][a-z])");
-      var remaining = Input.First();
-
-      for (var c = 0; c < remaining.Count() - 1; c++)
-      {
-        var test = patterns.Match(remaining.Substring(c, 2));
-        if (!string.IsNullOrEmpty(test.Value))
-        {
-          var op = Encoding.UTF8.GetBytes(test.Value.ToLower());
-          if (op.Count() == 2 && op.First() == op.Last())
-          {
-            remaining = remaining.Remove(c, 2);
-            c = 0;
-            Console.WriteLine("Running... Current Length: {0}   ", remaining.Length);
-          }
-        }
-      }
       return remaining.Count().ToString();
     }
 
@@ -72,7 +57,52 @@
     */
     public override string GetPart2Answer()
     {
-      return string.Empty;
+      var results = new List<string>();
+      var unaltered = Input[0];
+
+      foreach (var c in alphabet)
+      {
+        var removechar = Input[0].Replace(c.ToString(), string.Empty).Replace(Char.ToUpper(c).ToString(), string.Empty);
+        results.Add(GetReducedLine(removechar));
+      }
+
+      return $"{results.OrderBy(x => x.Length).First().Length}";
+    }
+
+    private string GetReducedLine(string remaining)
+    {
+      // Least efficient regex in history?
+      var patterns = new Regex(@"([a][A]|[A][a])|([b][B]|[B][b])|([c][C]|[C][c])|([d][D]|[D][d])|([e][E]|[E][e])|([f][F]|[F][f])|([g][G]|[G][g])|([h][H]|[H][h])|([i][I]|[I][i])|([j][J]|[J][j])|([k][K]|[K][k])|([l][L]|[L][l])|([m][M]|[M][m])|([n][N]|[N][n])|([o][O]|[O][o])|([p][P]|[P][p])|([q][Q]|[Q][q])|([r][R]|[R][r])|([s][S]|[S][s])|([t][T]|[T][t])|([u][U]|[U][u])|([v][V]|[V][v])|([w][W]|[W][w])|([x][X]|[X][x])|([y][Y]|[Y][y])|([z][Z]|[Z][z])");
+
+      var finished = false;
+
+      while (!finished)
+      {
+        var matching = patterns.Matches(remaining);
+        if (matching.Count < 1) finished = true;
+
+        foreach (var m in matching)
+        {
+          var myMatch = (m as Match).Value;
+          remaining = remaining.Replace(myMatch, string.Empty);
+        }
+      }
+
+      return remaining;
+    }
+
+    private string GenerateRegex()
+    {
+      var result = string.Empty;
+      foreach (var c in alphabet)
+      {
+        var up = c.ToString().ToUpper();
+        result += $"([{c}][{up}]|[{up}][{c}])|";
+      }
+
+      Console.WriteLine(result);
+
+      return result;
     }
   }
 }
