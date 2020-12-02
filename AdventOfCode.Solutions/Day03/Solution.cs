@@ -12,7 +12,7 @@
     private static int maxY = 1001;
     private List<Claim> claims { get; set; }
     private int[,] claimMap = new int[maxX, maxY];
-    public Solution() : base(3, "No Matter How You Slice It")
+    public Solution() : base(3, "")
     {
       ParseInputFile();
       PopulateClaimMap();

@@ -38,7 +38,7 @@ namespace AdventOfCode.Solutions
     {
       if (Day < 1 || Title == string.Empty) return new List<string>();
 
-      var lines = System.IO.File.ReadAllLines($"../AdventOfCode.Solutions/Day{Day.ToString("D2")}/input.txt");
+      var lines = System.IO.File.ReadAllLines($"../../../../AdventOfCode.Solutions/Day{Day.ToString("D2")}/input.txt");
 
       return new List<string>(lines);
     }

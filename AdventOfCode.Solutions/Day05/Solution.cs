@@ -9,7 +9,7 @@
   public class Solution : BaseSolution
   {
     private char[] alphabet = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-    public Solution() : base(5, "Alchemical Reduction")
+    public Solution() : base(5, "")
     {
     }
     /* --- Day 5: Alchemical Reduction ---

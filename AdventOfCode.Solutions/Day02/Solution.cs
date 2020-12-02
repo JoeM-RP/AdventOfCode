@@ -7,7 +7,7 @@
 
   public class Solution : BaseSolution
   {
-    public Solution() : base(2, "Inventory Management System")
+    public Solution() : base(2, "")
     {
     }
 

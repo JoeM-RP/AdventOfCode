@@ -11,14 +11,8 @@
     string[,] map;
     int maxX, maxY;
 
-    public Solution() : base(6, "Chronal Coordinates")
+    public Solution() : base(6, "")
     {
-      coordinates = Input.Select(i => new Coordinate(i)).ToList();
-      maxX = coordinates.OrderByDescending(x => x.X).First().X + 1;
-      maxY = coordinates.OrderByDescending(y => y.Y).First().Y + 1;
-
-      map = new string[maxY, maxX];
-      FillArray(map, ".");
     }
 
     /* --- Day 6: Chronal Coordinates ---

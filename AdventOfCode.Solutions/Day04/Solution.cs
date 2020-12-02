@@ -10,7 +10,7 @@
   {
     private List<GuardShift> shifts = new List<GuardShift>();
     private List<Guard> guards = new List<Guard>();
-    public Solution() : base(4, "Repose Record")
+    public Solution() : base(4, "")
     {
       ParseInputFile();
     }

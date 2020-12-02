@@ -1,114 +1,107 @@
 ﻿namespace AdventOfCode.Solutions.Day01
 {
-  using System;
-  using System.Collections.Generic;
-  using System.IO;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
 
-  public class Solution : BaseSolution
-  {
-    static List<int> input;
-    public Solution() : base(1, "Chronal Calibration")
+    public class Solution : BaseSolution
     {
-      input = getcurrentFreqInput();
-    }
-
-    /* --- Day 1: Chronal Calibration ---
-    "We've detected some temporal anomalies," one of Santa's Elves at the Temporal Anomaly Research and Detection Instrument Station tells you. She sounded pretty worried when she called you down here. "At 500-year intervals into the past, someone has been changing Santa's history!"
-
-    "The good news is that the changes won't propagate to our time stream for another 25 days, and we have a device" - she attaches something to your wrist - "that will let you fix the changes with no such propagation delay. It's configured to send you 500 years further into the past every few days; that was the best we could do on such short notice."
-
-    "The bad news is that we are detecting roughly fifty anomalies throughout time; the device will indicate fixed anomalies with stars. The other bad news is that we only have one device and you're the best person for the job! Good lu--" She taps a button on the device and you suddenly feel like you're falling. To save Christmas, you need to get all fifty stars by December 25th.
-
-    Collect stars by solving puzzles. Two puzzles will be made available on each day in the advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
-
-    After feeling like you've been falling for a few minutes, you look at the device's tiny screen. "Error: Device must be calibrated before first use. currentFreq drift detected. Cannot maintain destination lock." Below the message, the device shows a sequence of changes in currentFreq (your puzzle input). A value like +6 means the current currentFreq increases by 6; a value like -3 means the current currentFreq decreases by 3.
-
-    For example, if the device displays currentFreq changes of +1, -2, +3, +1, then starting from a currentFreq of zero, the following changes would occur:
-
-    Current currentFreq  0, change of +1; resulting currentFreq  1.
-    Current currentFreq  1, change of -2; resulting currentFreq -1.
-    Current currentFreq -1, change of +3; resulting currentFreq  2.
-    Current currentFreq  2, change of +1; resulting currentFreq  3.
-    In this example, the resulting currentFreq is 3.
-
-    Here are other example situations:
-
-    +1, +1, +1 results in  3
-    +1, +1, -2 results in  0
-    -1, -2, -3 results in -6
-    Starting with a currentFreq of zero, what is the resulting currentFreq after all of the changes in currentFreq have been applied?
-    */
-    public override string GetPart1Answer()
-    {
-      return "490"; // Returning previously solved value to save time
-
-      var result = 0;
-
-      foreach (var f in input)
-      {
-        result += f;
-      }
-
-      return result.ToString();
-    }
-
-    /* --- Part Two ---
-    You notice that the device repeats the same currentFreq change list over and over. To calibrate the device, you need to find the first currentFreq it reaches twice.
-
-    For example, using the same list of changes above, the device would loop as follows:
-
-    Current currentFreq  0, change of +1; resulting currentFreq  1.
-    Current currentFreq  1, change of -2; resulting currentFreq -1.
-    Current currentFreq -1, change of +3; resulting currentFreq  2.
-    Current currentFreq  2, change of +1; resulting currentFreq  3.
-    (At this point, the device continues from the start of the list.)
-    Current currentFreq  3, change of +1; resulting currentFreq  4.
-    Current currentFreq  4, change of -2; resulting currentFreq  2, which has already been seen.
-    In this example, the first currentFreq reached twice is 2. Note that your device might need to repeat its list of currentFreq changes many times before a duplicate currentFreq is found, and that duplicates might be found while in the middle of processing the list.
-
-    Here are other examples:
-
-    +1, -1 first reaches 0 twice.
-    +3, +3, +4, -2, -4 first reaches 10 twice.
-    -6, +3, +8, +5, -6 first reaches 5 twice.
-    +7, +7, -2, -7, -4 first reaches 14 twice.
-    What is the first currentFreq your device reaches twice?
-    */
-    public override string GetPart2Answer()
-    {
-      return "70357"; // Returning previously solved value to save time
-
-      var result = 0;
-      var currentFreq = 0;
-      var fLog = new List<int>();
-
-      while (true)
-      {
-        foreach (var f in input)
+        static List<int> input;
+        public Solution() : base(1, "Report Repair")
         {
-          currentFreq += f;
-
-          if (fLog.Contains(currentFreq))
-          {
-            result = currentFreq;
-            return result.ToString();
-          }
-
-          fLog.Add(currentFreq);
+            input = getInput();
         }
-      }
+
+        /* --- Day 1: Report Repair ---
+        After saving Christmas five years in a row, you've decided to take a vacation at a nice resort on a tropical island. Surely, Christmas will go on without you.
+
+        The tropical island has its own currency and is entirely cash-only. The gold coins used there have a little picture of a starfish; the locals just call them
+        stars. None of the currency exchanges seem to have heard of them, but somehow, you'll need to find fifty of these coins by the time you arrive so you can pay
+        the deposit on your room.
+
+        To save your vacation, you need to get all fifty stars by December 25th.
+
+        Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the
+        first. Each puzzle grants one star. Good luck!
+
+        Before you leave, the Elves in accounting just need you to fix your expense report (your puzzle input); apparently, something isn't quite adding up.
+
+        Specifically, they need you to find the two entries that sum to 2020 and then multiply those two numbers together.
+
+        For example, suppose your expense report contained the following:
+
+        1721
+        979
+        366
+        299
+        675
+        1456
+        In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying them together produces 1721 * 299 = 514579, so the correct answer is 514579.
+
+        Of course, your expense report is much larger. Find the two entries that sum to 2020; what do you get if you multiply them together?
+        */
+
+        public override string GetPart1Answer()
+        {
+            return "974304"; // Returning previously solved value to save time
+
+            var result = 0;
+
+            foreach (var f in input)
+            {
+                foreach (var s in input)
+                {
+                    if (s == f) continue;
+                    if (f + s == 2020)
+                        return (f * s).ToString();
+                }
+            }
+
+            return result.ToString();
+        }
+
+        /* --- Part Two ---
+        The Elves in accounting are thankful for your help; one of them even offers you a starfish coin they had left over from a past vacation. They offer you
+        a second one if you can find three numbers in your expense report that meet the same criteria.
+
+        Using the above example again, the three entries that sum to 2020 are 979, 366, and 675. Multiplying them together produces the answer, 241861950.
+
+        In your expense report, what is the product of the three entries that sum to 2020?
+        */
+
+        public override string GetPart2Answer()
+        {
+            return "236430480"; // Returning previously solved value to save time
+
+            for(int f = 0; f < input.Count; f++)
+            {
+                for(int s = 0; s < input.Count; s++)
+                {
+                    if (s == f) continue;
+
+                    for (int t = 0; t < input.Count; t++)
+                    {
+                        if (t == f || t == f) continue;
+
+                        if (input[f] + input[s] + input[t] == 2020)
+                            return (input[f] * input[s] * input[t]).ToString();
+                    }
+                }
+            }
+
+            return "NaN";
+        }
+
+        private List<int> getInput()
+        {
+            var result = new List<int>();
+
+            foreach (string line in Input)
+            {
+                result.Add(int.Parse(line));
+            }
+
+            return result;
+        }
     }
-
-    private List<int> getcurrentFreqInput()
-    {
-      var result = new List<int>();
-
-      foreach (string line in Input)
-      {
-        result.Add(int.Parse(line));
-      }
-
-      return result;
-    }
-  }
 }
